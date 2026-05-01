@@ -54,8 +54,16 @@
     "7z",
     "pack"
   ],
-  "author": "",
+  "author": "wangkai000 <wangkai233@qq.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wangkai000/unplugin-pack-orchestrator"
+  },
+  "bugs": {
+    "url": "https://github.com/wangkai000/unplugin-pack-orchestrator/issues"
+  },
+  "homepage": "https://github.com/wangkai000/unplugin-pack-orchestrator#readme",
   "peerDependencies": {
     "esbuild": "*",
     "rollup": "^3.0.0 || ^4.0.0",
