@@ -2,11 +2,6 @@
 
 <div align="center">
 
-![NPM Version](https://img.shields.io/npm/v/unplugin-pack-orchestrator)
-![NPM Downloads](https://img.shields.io/npm/dm/unplugin-pack-orchestrator)
-![License](https://img.shields.io/npm/l/unplugin-pack-orchestrator)
-![TypeScript](https://img.shields.io/npm/types/unplugin-pack-orchestrator)
-
 **English** | [简体中文](./README.md)
 
 > A universal pack plugin based on [unplugin](https://github.com/unjs/unplugin) for **Vite**, **Webpack**, **Rollup**, and **ESBuild**. Generates **ZIP** / **TAR** / **TAR.GZ** / **7Z** archives with zero runtime dependencies. Automatically computes checksums (MD5/SHA1/SHA256) after build, and supports auto-renaming archives via the `onAfterBuild` hook (e.g., appending hash or version) for traceable artifacts.
