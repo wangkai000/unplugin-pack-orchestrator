@@ -1,0 +1,1 @@
+console.log("hello webpack"); module.exports = { add: (a,b) => a+b };

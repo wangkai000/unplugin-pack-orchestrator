@@ -1,0 +1,1 @@
+console.log("hello rollup"); export const add = (a,b) => a+b;

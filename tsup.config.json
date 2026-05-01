@@ -1,0 +1,18 @@
+{
+  "entry": [
+    "src/index.ts",
+    "src/vite.ts",
+    "src/webpack.ts",
+    "src/rollup.ts",
+    "src/esbuild.ts"
+  ],
+  "format": ["cjs", "esm"],
+  "dts": true,
+  "splitting": true,
+  "clean": true,
+  "dtsOptions": {
+    "compilerOptions": {
+      "ignoreDeprecations": "5.0"
+    }
+  }
+}

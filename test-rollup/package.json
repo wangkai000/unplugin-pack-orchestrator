@@ -1,0 +1,11 @@
+{
+  "name": "test-rollup",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^4.60.2"
+  }
+}

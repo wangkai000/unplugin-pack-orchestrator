@@ -1,0 +1,1 @@
+console.log("hello vite"); document.getElementById("app").textContent = "OK";

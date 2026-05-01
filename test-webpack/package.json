@@ -1,0 +1,11 @@
+{
+  "name": "test-webpack",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "webpack": "^5.106.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
