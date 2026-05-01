@@ -1,11 +1,6 @@
 # unplugin-pack-orchestrator
 
-<div align="center">
-
-![NPM Version](https://img.shields.io/npm/v/unplugin-pack-orchestrator)
-![NPM Downloads](https://img.shields.io/npm/dm/unplugin-pack-orchestrator)
-![License](https://img.shields.io/npm/l/unplugin-pack-orchestrator)
-![TypeScript](https://img.shields.io/npm/types/unplugin-pack-orchestrator)
+<div>
 
 **English** | [简体中文](./README.md)
 
@@ -56,17 +51,19 @@ export default defineConfig({
       pack: {
         format: 'zip',
         fileName: 'dist-[name]-[version]',
-        outDir: 'dist',
-        archiveOutDir: '.',
+        outDir: 'dist',           // source directory to archive
+        archiveOutDir: '.',       // archive output directory, defaults to project root
         include: ['**/*'],
         exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**'],
-        compressionLevel: 9,
+        compressionLevel: 9,      // 0-9, higher = more compression
       },
       hooks: {
         onBeforeBuild: () => console.log('Build started...'),
+        onBundleGenerated: (bundle) => console.log('Bundle generated:', bundle),
         onAfterBuild: (path, format, checksums) => {
           console.log('Archive created:', path)
           console.log('MD5:', checksums.md5)
+          console.log('SHA256:', checksums.sha256)
         },
         onError: (err) => console.error('Error:', err.message),
       },
@@ -74,6 +71,8 @@ export default defineConfig({
   ],
 })
 ```
+
+> **Note**: After Vite build completes, the plugin automatically archives the `outDir`. No additional steps needed.
 
 ### Rollup
 
@@ -91,15 +90,23 @@ export default {
         fileName: 'bundle-[name]-[version]',
         outDir: 'dist',
         archiveOutDir: './releases',
+        include: ['**/*'],
         exclude: ['**/*.map', '**/*.d.ts'],
+        compressionLevel: 9,
       },
       hooks: {
-        onAfterBuild: (path) => console.log('Archive:', path),
+        onBeforeBuild: () => console.log('Packing...'),
+        onAfterBuild: (path, format, checksums) => {
+          console.log('Archive created:', path)
+        },
+        onError: (err) => console.error('Packing failed:', err.message),
       },
     }),
   ],
 }
 ```
+
+> **Note**: When Rollup outputs to a directory, the plugin triggers archiving after writing to `output.dir`.
 
 ### Webpack
 
@@ -110,7 +117,10 @@ const packOrchestrator = require('unplugin-pack-orchestrator/webpack')
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
-  output: { path: 'dist', filename: 'bundle.js' },
+  output: {
+    path: 'dist',
+    filename: 'bundle.js',
+  },
   plugins: [
     packOrchestrator({
       pack: {
@@ -118,20 +128,26 @@ module.exports = {
         fileName: 'webpack-[name]-[version]-[timestamp]',
         outDir: 'dist',
         archiveOutDir: './dist-archives',
+        include: ['**/*'],
         exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**'],
         compressionLevel: 9,
       },
       hooks: {
+        onBeforeBuild: () => console.log('Webpack build started'),
+        onBundleGenerated: (bundle) => console.log('Bundle generated:', bundle),
         onAfterBuild: (path, format, checksums) => {
-          console.log('Archive:', path)
+          console.log('Archive created:', path)
           console.log('MD5:', checksums.md5)
           console.log('SHA256:', checksums.sha256)
         },
+        onError: (err) => console.error('Error:', err.message),
       },
     }),
   ],
 }
 ```
+
+> **Note**: Webpack uses CommonJS import, plugin path is `unplugin-pack-orchestrator/webpack`.
 
 ### ESBuild
 
@@ -140,7 +156,7 @@ module.exports = {
 const packOrchestrator = require('unplugin-pack-orchestrator/esbuild')
 
 async function build() {
-  await (await import('esbuild')).build({
+  const result = await import('esbuild').then(esbuild => esbuild.build({
     entryPoints: ['./src/index.js'],
     bundle: true,
     outfile: 'dist/bundle.js',
@@ -153,21 +169,26 @@ async function build() {
           fileName: 'esbuild-[name]-[version]',
           outDir: 'dist',
           archiveOutDir: './artifacts',
+          include: ['**/*'],
           exclude: ['**/*.map'],
+          compressionLevel: 9,
         },
         hooks: {
           onAfterBuild: (path, format, checksums) => {
-            console.log('Archive:', path)
+            console.log('Archive created:', path)
             console.log('MD5:', checksums.md5)
           },
         },
       }),
     ],
-  })
+  }))
+  await result
 }
 
 build()
 ```
+
+> **Note**: ESBuild uses dynamic import, note the plugin path. ESBuild mode supports `format: '7z'`.
 
 ---
 
@@ -294,7 +315,10 @@ const path = require('path')
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
-  output: { path: 'dist', filename: 'bundle.js' },
+  output: {
+    path: 'dist',
+    filename: 'bundle.js',
+  },
   plugins: [
     packOrchestrator({
       pack: {
