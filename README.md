@@ -2,14 +2,9 @@
 
 <div align="center">
 
-![NPM Version](https://img.shields.io/npm/v/unplugin-pack-orchestrator)
-![NPM Downloads](https://img.shields.io/npm/dm/unplugin-pack-orchestrator)
-![License](https://img.shields.io/npm/l/unplugin-pack-orchestrator)
-![TypeScript](https://img.shields.io/npm/types/unplugin-pack-orchestrator)
+[English](https://github.com/wangkai000/unplugin-pack-orchestrator/blob/main/README.en.md) | **中文**
 
-[English](./README.en.md) | **中文**
-
-> 基于 [unplugin](https://github.com/unjs/unplugin) 的通用打包归档插件，支持 **Vite**、**Webpack**、**Rollup**、**ESBuild**，可生成 **ZIP** / **TAR** / **TAR.GZ** / **7Z** 归档文件，运行时零额外依赖。构建完成后自动计算校验和（MD5/SHA1/SHA256），支持通过 `onAfterBuild` 钩子自动重命名归档文件（如追加哈希、版本号），实现产物可追溯。
+> 基于 [unplugin](https://github.com/unjs/unplugin) 的通用打包压缩归档插件，支持 **Vite**、**Webpack**、**Rollup**、**ESBuild**，可生成 **ZIP** / **TAR** / **TAR.GZ** / **7Z** 归档压缩文件，运行时零额外依赖。构建完成后自动计算校验和（MD5/SHA1/SHA256），支持通过 `onAfterBuild` 钩子自动重命名归档文件（如追加哈希、版本号），实现产物可追溯。
 
 [报告问题](https://github.com/wangkai000/unplugin-pack-orchestrator/issues) · [功能请求](https://github.com/wangkai000/unplugin-pack-orchestrator/issues)
 
@@ -31,12 +26,12 @@
 
 ## 安装
 
-```bash
-npm install unplugin-pack-orchestrator
+```shell
+npm install unplugin-pack-orchestrator -D
 # 或
-pnpm add unplugin-pack-orchestrator
+pnpm add unplugin-pack-orchestrator -D
 # 或
-yarn add unplugin-pack-orchestrator
+yarn add unplugin-pack-orchestrator -D
 ```
 
 ---
